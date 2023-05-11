@@ -148,7 +148,7 @@ func (a AgenciesDbRepository) ListAgencyCampaigns(
 	tx := a.Table("campaigns").
 		Select(selectColumns).
 		Joins("join users on users.id = campaigns.manager_id").
-		Joins("join companies on companies.id = companies.manager_id").
+		Joins("join companies on companies.id = campaigns.company_id").
 		Where("campaigns.agency_id = ?", agencyId).
 		Where("campaigns.deleted_at is null")
 
