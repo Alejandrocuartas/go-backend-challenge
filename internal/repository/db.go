@@ -2,15 +2,17 @@ package repository
 
 import (
 	"fmt"
-	"github.com/jinzhu/gorm"
+	"go-backend-challenge/core-models-private-library/models/agencies"
 	"go-backend-challenge/core-models-private-library/models/campaign_creator_social_network_actions"
 	"go-backend-challenge/core-models-private-library/models/campaigns"
 	"go-backend-challenge/core-models-private-library/models/companies"
 	"go-backend-challenge/core-models-private-library/models/creator_social_networks"
 	"go-backend-challenge/core-models-private-library/models/user_agency_relations"
 	"go-backend-challenge/core-models-private-library/models/users"
-	"go-backend-challenge/core-utils-private-library"
+	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/model"
+
+	"github.com/jinzhu/gorm"
 )
 
 type AgenciesDbRepository struct {
@@ -83,6 +85,25 @@ func (c AgenciesDbRepository) CreateCampaign(
 			"SELECT setval('%s_id_seq', (select max(id) from %s) + 1, FALSE);",
 			"campaigns",
 			"campaigns",
+		),
+	)
+	if err := c.Create(&u).Error; err != nil {
+		return u, err
+	}
+	return u, nil
+}
+
+func (c AgenciesDbRepository) CreateAgency(
+	u agencies.Agency,
+) (
+	agencies.Agency,
+	error,
+) {
+	c.Exec(
+		fmt.Sprintf(
+			"SELECT setval('%s_id_seq', (select max(id) from %s) + 1, FALSE);",
+			"agencies",
+			"agencies",
 		),
 	)
 	if err := c.Create(&u).Error; err != nil {

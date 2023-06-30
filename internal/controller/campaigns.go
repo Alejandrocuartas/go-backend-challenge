@@ -1,12 +1,13 @@
 package controller
 
 import (
-	"github.com/gorilla/mux"
-	"go-backend-challenge/core-utils-private-library"
+	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/model"
 	"go-backend-challenge/internal/service"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 type CampaignsControllerStruct struct {
@@ -44,8 +45,6 @@ func (c CampaignsControllerStruct) CreateCampaignControllerMethod(w http.Respons
 	}
 
 	utils.ParseToJson(w, http.StatusOK, utils.Map{"status": "SUCCESS", "message": nil, "data": response})
-	return
-
 }
 
 func (c CampaignsControllerStruct) GetCampaignByIdControllerMethod(w http.ResponseWriter, r *http.Request) {
@@ -85,8 +84,6 @@ func (c CampaignsControllerStruct) ListCampaignsControllerMethod(w http.Response
 	}
 
 	utils.SuccessPaginationResponse(w, http.StatusOK, response)
-	return
-
 }
 
 func (c CampaignsControllerStruct) UpdateCampaignControllerMethod(w http.ResponseWriter, r *http.Request) {
@@ -121,6 +118,4 @@ func (c CampaignsControllerStruct) UpdateCampaignControllerMethod(w http.Respons
 	}
 
 	utils.ParseToJson(w, http.StatusOK, utils.Map{"status": "SUCCESS", "message": nil, "data": response})
-	return
-
 }

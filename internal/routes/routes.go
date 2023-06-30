@@ -2,23 +2,28 @@ package router
 
 import (
 	"fmt"
-	"github.com/gorilla/mux"
-	"go-backend-challenge/core-utils-private-library"
-	"go-backend-challenge/environment"
+	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/controller"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func ApiRouter(c controller.CustomControllerStruct) *mux.Router {
 	r := mux.NewRouter()
 
-	basicAuth := utils.BasicAuth(
-		environment.BasicAuthUsername,
-		environment.BasicAuthPassword,
-	)
-	r.Use(basicAuth)
+	//basicAuth := utils.BasicAuth(
+	//	environment.BasicAuthUsername,
+	//	environment.BasicAuthPassword,
+	//)
+	//r.Use(basicAuth)
 
 	r.NotFoundHandler = http.HandlerFunc(utils.NotFoundHandler)
+
+	r.HandleFunc(
+		"/v1/agencies",
+		c.Agencies.CreateAgencyControllerMethod,
+	).Methods(http.MethodPost)
 
 	r.HandleFunc(
 		"/v1/campaigns",
@@ -42,7 +47,11 @@ func ApiRouter(c controller.CustomControllerStruct) *mux.Router {
 
 	fmt.Println("Available Routes:")
 	r.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
-		t, err := route.GetPathTemplate()
+		t, e := route.GetPathTemplate()
+		if e != nil {
+			return e
+		}
+
 		methods, err := route.GetMethods()
 		if err != nil {
 			return err

@@ -2,10 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/awslabs/aws-lambda-go-api-proxy/httpadapter"
-	"github.com/rs/cors"
-	"github.com/urfave/negroni"
 	"go-backend-challenge/core-models-private-library/migrations"
 	"go-backend-challenge/environment"
 	"go-backend-challenge/internal/controller"
@@ -15,6 +11,11 @@ import (
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/awslabs/aws-lambda-go-api-proxy/httpadapter"
+	"github.com/rs/cors"
+	"github.com/urfave/negroni"
 )
 
 func main() {
@@ -51,6 +52,6 @@ func main() {
 
 	port := environment.ServerPort
 
-	fmt.Printf(fmt.Sprintf("http server is running on port :%d", port))
+	fmt.Printf("http server is running on port :%d", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), handler))
 }
