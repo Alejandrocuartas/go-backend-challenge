@@ -4,6 +4,8 @@ import (
 	"log"
 	"os"
 	"strconv"
+
+	"github.com/joho/godotenv"
 )
 
 var (
@@ -22,7 +24,7 @@ var (
 )
 
 func InitializeEnv() {
-	// godotenv.Load()
+	godotenv.Load()
 	DbHost = validateAndReturnVariable("DB_HOST")
 	DbPort = validateAndReturnVariable("DB_PORT")
 	DbName = validateAndReturnVariable("DB_NAME")
