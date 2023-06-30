@@ -4,14 +4,15 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"github.com/jinzhu/gorm"
 	"go-backend-challenge/core-models-private-library/models/campaign_creator_social_network_actions"
 	"go-backend-challenge/core-models-private-library/models/campaigns"
 	"go-backend-challenge/core-models-private-library/models/users"
-	"go-backend-challenge/core-utils-private-library"
+	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/model"
 	"go-backend-challenge/internal/repository"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type CampaignsServiceInterface interface {
@@ -126,7 +127,7 @@ func (c CampaignsServiceStruct) GetCampaignByIdServiceMethod(
 		CampaignManagerID:   campaign.ManagerId,
 		CampaignCompanyID:   campaign.CompanyId,
 		ManagerEmail:        manager.Email,
-		ManagerName:         manager.FirstName.String,
+		ManagerName:         manager.FirstName,
 		CompanyName:         company.Name,
 		CompanyEmail:        company.Email.String,
 	}, err

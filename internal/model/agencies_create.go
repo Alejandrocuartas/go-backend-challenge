@@ -11,7 +11,7 @@ type CreateAgencyRequestModel struct {
 func (data CreateAgencyRequestModel) ValidateData() error {
 
 	if data.Name == "" {
-		return errors.New("agency_name is required")
+		return errors.New("name is required")
 	}
 
 	return nil

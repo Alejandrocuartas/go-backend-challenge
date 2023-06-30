@@ -8,6 +8,7 @@ import (
 type CustomControllerStruct struct {
 	Campaigns CampaignsControllerInterface
 	Agencies  AgenciesControllerInterface
+	Users     UsersControllerInterface
 }
 
 func NewControl() CustomControllerStruct {
@@ -22,6 +23,13 @@ func NewControl() CustomControllerStruct {
 		},
 		Agencies: AgenciesControllerStruct{
 			AgenciesServiceStruct: service.AgenciesServiceStruct{
+				AgenciesDbRepository: repository.AgenciesDbRepository{
+					DB: agenciesDBConnection,
+				},
+			},
+		},
+		Users: UsersControllerStruct{
+			UsersServiceStruct: service.UsersServiceStruct{
 				AgenciesDbRepository: repository.AgenciesDbRepository{
 					DB: agenciesDBConnection,
 				},

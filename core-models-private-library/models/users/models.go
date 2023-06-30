@@ -8,8 +8,8 @@ import (
 type User struct {
 	models.BaseModelIDInt
 	Email                  string         `gorm:"column:email" sql:"type:varchar(250); not null; unique_index" json:"email"`
-	FirstName              sql.NullString `gorm:"column:first_name" sql:"type:varchar(250);" json:"first_name"`
-	LastName               sql.NullString `gorm:"column:last_name" sql:"type:varchar(250);" json:"last_name"`
+	FirstName              string         `gorm:"column:first_name" sql:"type:varchar(250);" json:"first_name"`
+	LastName               string         `gorm:"column:last_name" sql:"type:varchar(250);" json:"last_name"`
 	PhoneNumber            sql.NullString `gorm:"column:phone_number" sql:"type:varchar(250);" json:"phone_number"`
 	PhoneNumberCountryCode sql.NullString `gorm:"column:phone_number_country_code" sql:"type:varchar(250);" json:"phone_number_country_code"`
 	OnBoardingCompleted    bool           `gorm:"column:on_boarding_completed" sql:"type:boolean" json:"on_boarding_completed"`

@@ -21,6 +21,11 @@ func ApiRouter(c controller.CustomControllerStruct) *mux.Router {
 	r.NotFoundHandler = http.HandlerFunc(utils.NotFoundHandler)
 
 	r.HandleFunc(
+		"/v1/users",
+		c.Users.CreateUserControllerMethod,
+	).Methods(http.MethodPost)
+
+	r.HandleFunc(
 		"/v1/agencies",
 		c.Agencies.CreateAgencyControllerMethod,
 	).Methods(http.MethodPost)

@@ -112,6 +112,25 @@ func (c AgenciesDbRepository) CreateAgency(
 	return u, nil
 }
 
+func (c AgenciesDbRepository) CreateUser(
+	u users.User,
+) (
+	users.User,
+	error,
+) {
+	c.Exec(
+		fmt.Sprintf(
+			"SELECT setval('%s_id_seq', (select max(id) from %s) + 1, FALSE);",
+			"users",
+			"users",
+		),
+	)
+	if err := c.Create(&u).Error; err != nil {
+		return u, err
+	}
+	return u, nil
+}
+
 func (c AgenciesDbRepository) CreateCampaignCreatorSocialNetworkAction(
 	u campaign_creator_social_network_actions.CampaignCreatorSocialNetworkActions,
 ) (
