@@ -36,7 +36,7 @@ func (data ListCampaignsRequestModel) ValidateData() error {
 		return errors.New("limit is required")
 	} else if data.Page == 0 {
 		return errors.New("page is required")
-	} else if data.Page == 0 {
+	} else if data.AgencyId == 0 {
 		return errors.New("user_id is required")
 	}
 	return nil

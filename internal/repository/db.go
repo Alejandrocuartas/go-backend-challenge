@@ -8,6 +8,7 @@ import (
 	"go-backend-challenge/core-models-private-library/models/companies"
 	"go-backend-challenge/core-models-private-library/models/creator_social_networks"
 	"go-backend-challenge/core-models-private-library/models/user_agency_relations"
+	uar "go-backend-challenge/core-models-private-library/models/user_agency_relations"
 	"go-backend-challenge/core-models-private-library/models/users"
 	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/model"
@@ -104,6 +105,25 @@ func (c AgenciesDbRepository) CreateAgency(
 			"SELECT setval('%s_id_seq', (select max(id) from %s) + 1, FALSE);",
 			"agencies",
 			"agencies",
+		),
+	)
+	if err := c.Create(&u).Error; err != nil {
+		return u, err
+	}
+	return u, nil
+}
+
+func (c AgenciesDbRepository) CreateUserAgencyRelation(
+	u uar.UserAgencyRelation,
+) (
+	uar.UserAgencyRelation,
+	error,
+) {
+	c.Exec(
+		fmt.Sprintf(
+			"SELECT setval('%s_id_seq', (select max(id) from %s) + 1, FALSE);",
+			"user_agency_relations",
+			"user_agency_relations",
 		),
 	)
 	if err := c.Create(&u).Error; err != nil {
