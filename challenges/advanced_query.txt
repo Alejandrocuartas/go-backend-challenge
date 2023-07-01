@@ -1,0 +1,6 @@
+SELECT campaigns.*
+FROM campaigns
+JOIN campaign_creator_social_network_actions ON campaigns.id = campaign_creator_social_network_actions.campaign_id
+WHERE campaign_creator_social_network_actions.code_name = 'ACTION_NAME';
+
+//this query fetches all the campaigns that matches the ACTION_NAME.
