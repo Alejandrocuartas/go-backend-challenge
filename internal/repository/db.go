@@ -7,7 +7,6 @@ import (
 	"go-backend-challenge/core-models-private-library/models/campaigns"
 	"go-backend-challenge/core-models-private-library/models/companies"
 	"go-backend-challenge/core-models-private-library/models/creator_social_networks"
-	"go-backend-challenge/core-models-private-library/models/user_agency_relations"
 	uar "go-backend-challenge/core-models-private-library/models/user_agency_relations"
 	"go-backend-challenge/core-models-private-library/models/users"
 	utils "go-backend-challenge/core-utils-private-library"
@@ -170,6 +169,53 @@ func (c AgenciesDbRepository) CreateCampaignCreatorSocialNetworkAction(
 	return u, nil
 }
 
+func (a AgenciesDbRepository) ListActionsCampaign(campaignId uint) (
+	[]campaign_creator_social_network_actions.CampaignCreatorSocialNetworkActions,
+	error,
+) {
+
+	var campaignActions []campaign_creator_social_network_actions.CampaignCreatorSocialNetworkActions
+
+	selectColumns := `
+	campaign_creator_social_network_actions.code_name as action_name,
+	campaign_creator_social_network_actions.quantity as action_quantity,
+	campaign_creator_social_network_actions.cost_price as action_price,
+	campaign_creator_social_network_actions.cost_currency as action_cost_currency
+`
+
+	mtdt := a.Table("campaign_creator_social_network_actions").
+		Select(selectColumns).
+		Where("campaign_creator_social_network_actions.campaign_id = ?", campaignId).
+		Where("campaign_creator_social_network_actions.deleted_at is null")
+
+	if mtdt.Error != nil {
+		return nil, mtdt.Error
+	}
+
+	rows, err := mtdt.Rows()
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var action campaign_creator_social_network_actions.CampaignCreatorSocialNetworkActions
+		err := rows.Scan(
+			&action.CodeName,
+			&action.Quantity,
+			&action.CostPrice,
+			&action.CostCurrency,
+		)
+		if err != nil {
+			return nil, err
+		}
+		campaignActions = append(campaignActions, action)
+	}
+
+	return campaignActions, nil
+
+}
+
 func (a AgenciesDbRepository) ListAgencyCampaigns(
 	pagination utils.GormPaginationData,
 	agencyId uint,
@@ -228,13 +274,26 @@ func (a AgenciesDbRepository) ListAgencyCampaigns(
 
 	tx = tx.Scopes(utils.Paginate(results, &pagination, tx)).
 		Scan(&results)
-
 	pagination.Rows = results
 
 	if pagination.Rows == nil {
 		pagination.Rows = make([]interface{}, 0)
 		return utils.GormPaginationData{}, tx.Error
 	}
+	for i := 0; i < len(results); i++ {
+
+		acts, e := a.ListActionsCampaign(results[i].CampaignID)
+		if e != nil {
+			return utils.GormPaginationData{}, e
+		}
+		for _, act := range acts {
+			if act.CodeName != "" {
+				results[i].CampaignCreatorSocialNetworkActions = acts
+			}
+		}
+	}
+
+	pagination.Rows = results
 
 	return pagination, tx.Error
 
@@ -249,7 +308,7 @@ func (c AgenciesDbRepository) IsAnManagerAgencyRelation(
 ) {
 
 	var relationExists bool
-	var res user_agency_relations.UserAgencyRelation
+	var res uar.UserAgencyRelation
 
 	err := c.DB.
 		Table("user_agency_relations").
