@@ -10,6 +10,7 @@ type CustomControllerStruct struct {
 	Agencies            AgenciesControllerInterface
 	Users               UsersControllerInterface
 	UserAgencyRelations UserAgencyRelationsControllerInterface
+	Actions             ActionsControllerInterface
 }
 
 func NewControl() CustomControllerStruct {
@@ -38,6 +39,13 @@ func NewControl() CustomControllerStruct {
 		},
 		UserAgencyRelations: UserAgencyRelationsControllerStruct{
 			UserAgencyRelationsServiceStruct: service.UserAgencyRelationsServiceStruct{
+				AgenciesDbRepository: repository.AgenciesDbRepository{
+					DB: agenciesDBConnection,
+				},
+			},
+		},
+		Actions: ActionsControllerStruct{
+			ActionsServiceStruct: service.ActionsServiceStruct{
 				AgenciesDbRepository: repository.AgenciesDbRepository{
 					DB: agenciesDBConnection,
 				},
