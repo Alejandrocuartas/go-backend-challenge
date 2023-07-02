@@ -1,11 +1,12 @@
 package controller
 
 import (
-	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/model"
 	"go-backend-challenge/internal/service"
 	"net/http"
 	"strconv"
+
+	utils "github.com/Alejandrocuartas/core-utils-private-library"
 
 	"github.com/gorilla/mux"
 )

@@ -2,15 +2,17 @@ package repository
 
 import (
 	"fmt"
-	"go-backend-challenge/core-models-private-library/models/agencies"
-	"go-backend-challenge/core-models-private-library/models/campaign_creator_social_network_actions"
-	"go-backend-challenge/core-models-private-library/models/campaigns"
-	"go-backend-challenge/core-models-private-library/models/companies"
-	"go-backend-challenge/core-models-private-library/models/creator_social_networks"
-	uar "go-backend-challenge/core-models-private-library/models/user_agency_relations"
-	"go-backend-challenge/core-models-private-library/models/users"
-	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/model"
+
+	utils "github.com/Alejandrocuartas/core-utils-private-library"
+
+	"github.com/Alejandrocuartas/core-models-private-library/models/agencies"
+	"github.com/Alejandrocuartas/core-models-private-library/models/campaign_creator_social_network_actions"
+	"github.com/Alejandrocuartas/core-models-private-library/models/campaigns"
+	"github.com/Alejandrocuartas/core-models-private-library/models/companies"
+	"github.com/Alejandrocuartas/core-models-private-library/models/creator_social_networks"
+	uar "github.com/Alejandrocuartas/core-models-private-library/models/user_agency_relations"
+	"github.com/Alejandrocuartas/core-models-private-library/models/users"
 
 	"github.com/jinzhu/gorm"
 )

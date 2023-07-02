@@ -3,9 +3,10 @@ package service
 import (
 	"fmt"
 
-	uar "go-backend-challenge/core-models-private-library/models/user_agency_relations"
 	"go-backend-challenge/internal/model"
 	"go-backend-challenge/internal/repository"
+
+	uar "github.com/Alejandrocuartas/core-models-private-library/models/user_agency_relations"
 )
 
 type UserAgencyRelationsServiceInterface interface {

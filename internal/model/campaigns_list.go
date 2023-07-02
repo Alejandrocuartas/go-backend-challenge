@@ -2,7 +2,8 @@ package model
 
 import (
 	"errors"
-	m "go-backend-challenge/core-models-private-library/models/campaign_creator_social_network_actions"
+
+	m "github.com/Alejandrocuartas/core-models-private-library/models/campaign_creator_social_network_actions"
 )
 
 type ListCampaignsRequestModel struct {

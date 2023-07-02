@@ -1,10 +1,11 @@
 package controller
 
 import (
-	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/model"
 	"go-backend-challenge/internal/service"
 	"net/http"
+
+	utils "github.com/Alejandrocuartas/core-utils-private-library"
 )
 
 type ActionsControllerStruct struct {

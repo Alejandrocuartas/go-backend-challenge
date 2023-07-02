@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"go-backend-challenge/core-models-private-library/migrations"
 	"go-backend-challenge/environment"
 	"go-backend-challenge/internal/controller"
 	"go-backend-challenge/internal/repository"
@@ -11,6 +10,8 @@ import (
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/Alejandrocuartas/core-models-private-library/migrations"
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/awslabs/aws-lambda-go-api-proxy/httpadapter"

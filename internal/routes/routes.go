@@ -2,9 +2,10 @@ package router
 
 import (
 	"fmt"
-	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/controller"
 	"net/http"
+
+	utils "github.com/Alejandrocuartas/core-utils-private-library"
 
 	"github.com/gorilla/mux"
 )

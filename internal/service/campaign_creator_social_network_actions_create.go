@@ -3,9 +3,10 @@ package service
 import (
 	"fmt"
 
-	m "go-backend-challenge/core-models-private-library/models/campaign_creator_social_network_actions"
 	"go-backend-challenge/internal/model"
 	"go-backend-challenge/internal/repository"
+
+	m "github.com/Alejandrocuartas/core-models-private-library/models/campaign_creator_social_network_actions"
 )
 
 type ActionsServiceInterface interface {

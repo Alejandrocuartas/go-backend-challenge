@@ -3,9 +3,10 @@ package service
 import (
 	"fmt"
 
-	"go-backend-challenge/core-models-private-library/models/users"
 	"go-backend-challenge/internal/model"
 	"go-backend-challenge/internal/repository"
+
+	"github.com/Alejandrocuartas/core-models-private-library/models/users"
 )
 
 type UsersServiceInterface interface {

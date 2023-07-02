@@ -4,13 +4,15 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"go-backend-challenge/core-models-private-library/models/campaign_creator_social_network_actions"
-	"go-backend-challenge/core-models-private-library/models/campaigns"
-	"go-backend-challenge/core-models-private-library/models/users"
-	utils "go-backend-challenge/core-utils-private-library"
 	"go-backend-challenge/internal/model"
 	"go-backend-challenge/internal/repository"
 	"time"
+
+	utils "github.com/Alejandrocuartas/core-utils-private-library"
+
+	"github.com/Alejandrocuartas/core-models-private-library/models/campaign_creator_social_network_actions"
+	"github.com/Alejandrocuartas/core-models-private-library/models/campaigns"
+	"github.com/Alejandrocuartas/core-models-private-library/models/users"
 
 	"github.com/jinzhu/gorm"
 )
