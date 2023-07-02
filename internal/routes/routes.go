@@ -2,6 +2,7 @@ package router
 
 import (
 	"fmt"
+	"go-backend-challenge/environment"
 	"go-backend-challenge/internal/controller"
 	"net/http"
 
@@ -13,11 +14,12 @@ import (
 func ApiRouter(c controller.CustomControllerStruct) *mux.Router {
 	r := mux.NewRouter()
 
-	//basicAuth := utils.BasicAuth(
-	//	environment.BasicAuthUsername,
-	//	environment.BasicAuthPassword,
-	//)
-	//r.Use(basicAuth)
+	basicAuth := utils.BasicAuth(
+		environment.BasicAuthUsername,
+		environment.BasicAuthPassword,
+	)
+
+	r.Use(basicAuth)
 
 	r.NotFoundHandler = http.HandlerFunc(utils.NotFoundHandler)
 
